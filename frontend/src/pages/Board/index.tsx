@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Container, Message } from './styles';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
@@ -14,7 +14,7 @@ interface IMessage {
 }
 
 const DELETE_MESSAGE = gql`
-  mutation($id: Number!, $userId: Number!){
+  mutation($id: ID!, $userId: Number!){
     deleteMessage(data: {
       id: $id,
       userId: $userId
@@ -38,27 +38,20 @@ const GET_ALL_MESSAGES = gql`
 `;
 
 export default function Board() {
-  // const [messages, setMessages] = useState<IMessage[]>([]);
-  // const [deleteMessage, { data }] = useMutation(DELETE_MESSAGE);
+  const [messages, setMessages] = useState<IMessage[]>([]);
+  const { data } = useQuery<{ getMessages: IMessage[] }>(GET_ALL_MESSAGES);
 
-  const { loading, data } = useQuery<{ getMessages: IMessage[] }>(
-    GET_ALL_MESSAGES
-  );
-  if (loading) return <p>Loading ...</p>;
+  const [deleteMessage] = useMutation(DELETE_MESSAGE);
 
-  // useEffect(() => {
-  //   if (data) {
-  //     const { deleteMessage } = data;
-  //     const { id } = deleteMessage;
+  useEffect(() => {
+    if (data) {
+      setMessages(data.getMessages)
+    }
+  }, [data]);
 
-  //     console.log(id);
-  //   }
-  // }, [data]);
-
-  function handleDelete(e: React.MouseEvent, id: number) {
-    console.log(id);
+  async function handleDelete(e: React.MouseEvent, id: number) {
     try {
-      // deleteMessage({ variables: { id: id, userId: 1 } });
+      await deleteMessage({ variables: { id: id, userId: 1 } });
     } catch(error) {
       alert('Erro ao deletar mensagem, tente novamente.');
     }
@@ -66,7 +59,7 @@ export default function Board() {
 
   return (
     <Container>
-      {data?.getMessages.map(item => (
+      {messages.map(item => (
         <Message key={item.id}>
           <p>{item.content}</p>
 

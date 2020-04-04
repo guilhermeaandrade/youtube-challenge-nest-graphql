@@ -38,5 +38,5 @@ Code Challenge - NestJS + TypeORM + GraphQL
 
 1. Clone this repository;<br />
 2. Run `npm or yarn install` at each project in order to install dependencies.<br />
-3. Run `yarn start:dev` for `backend` and `yarn start` for `frontend` folder.<br />
+3. Run `yarn start` for `backend` and `yarn start` for `frontend` folder.<br />
 4. Access `localhost:3000` in your browser. GraphQL playground: `localhost:3333/graphql`.<br />
