@@ -7,6 +7,6 @@ export class AppController {
 
   @Get()
   async getHello(): Promise<string> {
-    return `Total messages are ${await this.repoService.messageRepo.count() }`;
+    return `There are ${await this.repoService.messageRepo.count()} existent messages`;
   }
 }

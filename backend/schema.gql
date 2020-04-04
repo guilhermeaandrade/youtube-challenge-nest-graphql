@@ -27,7 +27,7 @@ input MessageInput {
 }
 
 type Mutation {
-  createUser(data: UserInput!): User!
+  createOrLoginUser(data: UserInput!): User!
   createMessage(data: MessageInput!): Message!
   deleteMessage(data: DeleteMessageInput!): Message!
 }
@@ -38,6 +38,10 @@ type Query {
   getMessages: [Message!]!
   getMessagesFromUser(userId: Float!): [Message!]!
   getMessage(id: Float!): Message
+}
+
+type Subscription {
+  messageAdded: Message!
 }
 
 type User {
