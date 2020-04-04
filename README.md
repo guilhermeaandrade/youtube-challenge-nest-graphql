@@ -27,20 +27,6 @@ Code Challenge - NestJS + TypeORM + GraphQL
 
 - [x] Usuário não pode deletar mensagens de outros usuários
 
-
-## Functional Requirements
-
-- [x] User register with e-mail only
-- [x] User login with e-mail only
-- [x] User need to be able to post messages on the Board (Back-end)
-- [ ] User need to be able to post messages on the Board (Front-end)
-- [x] (optional) User need to be able to delete messages (Back-end)
-- [ ] (optional) User need to be able to delete messages (Front-end)
-- [x] New messages can be listed at real time (Back-end)
-- [ ] New messages can be listed at real time (Front-end)
-- [ ] Add Swagger support
-- [ ] DataLoader integration
-
 ## O que pode ser melhorado?
 - Autenticação JWT
 
